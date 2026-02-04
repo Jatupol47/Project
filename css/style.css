@@ -143,7 +143,6 @@ nav a {
 
 /* About section */
 .about-section {
-  margin-top: 80px;
   background-color: var(--Beige);
   border: 3px solid #000000;
   border-radius: 15px;
@@ -276,32 +275,124 @@ nav a {
   object-fit: cover;
 }
 
-.teachings{
-  margin-top: 150px;
-  background-color: var(--Beige);
-  border-radius: 15px;
-  padding: 1rem 5rem;
+/* วิดีโอฝัง */
+.learning-container {
+  display: flex;;
+  gap: 20px;
+  margin: 15px auto; 
+  background-color: var(--Beige); 
+  border-radius: 10px; 
+  padding: 20px;
   box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  align-items: flex-start;
 }
 
-/* วิดีโอฝัง */
+.card-box {
+  background: rgba(108, 117, 125, 0.5); /* สีเทาโปร่งแสงตามธีมเดิม */
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  flex: 1;
+  min-width: 300px; /* ขนาดขั้นต่ำก่อนปัดลงบรรทัดใหม่ */
+}
+
+.video-buttons {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.video-buttons button {
+  padding: 0.5rem 1rem;
+  min-width: 110px;
+}
+
+
 .video-container {
   position: relative;
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
+  width: 100%;          /* ลดจาก 50% */
+  max-width: 800px;    /* ลดจาก 800px */
+  margin: 2rem auto;   /* ลดช่องว่างบนล่าง */
   padding-bottom: 56.25%; /* 16:9 */
-  height: 0;
 }
 
 .video-container iframe {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  border: 0;
 }
 
+/* ส่วนหนังสือ */
+.book-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px; /* ความสูงขั้นต่ำ */
+  background: #f8f9fa; /* สีพื้นหลังหนังสือให้ดูสว่าง */
+  color: #333;
+}
+
+/* หน้าปกก่อนเปิด */
+.book-placeholder {
+  text-align: center;
+}
+
+.book-icon {
+  font-size: 80px;
+  margin-bottom: 10px;
+}
+
+.btn-open-book {
+  background: #d35400; /* สีส้มอิฐ */
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: transform 0.2s;
+}
+
+.btn-open-book:hover {
+  transform: scale(1.05);
+  background: #e67e22;
+}
+
+/* ตัวอ่าน PDF */
+.pdf-container {
+  width: 100%;
+  height: 600px; /* ความสูงของ PDF */
+  position: relative;
+}
+
+.pdf-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+
+.btn-close-book {
+  background: transparent;
+  border: none;
+  color: #e74c3c;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.pdf-container iframe {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  height: 90%;
+}
 
 /* Footer */
 footer h3, footer h4, footer p {

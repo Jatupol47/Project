@@ -1,3 +1,22 @@
+let player;
+// ฟังก์ชัน API ต้องอยู่บน Global Scope (window) เพื่อให้ Google Script เรียกหาเจอ
+window.onYouTubeIframeAPIReady = function() {
+  if (typeof YT !== 'undefined' && YT.Player) {
+    player = new YT.Player('player', {
+      height: '50%', // ปรับเป็น 100% เพื่อความสวยงาม
+      width: '50%', // ปรับเป็น 100% เพื่อความสวยงาม
+      videoId: 'EASQQvYIFjY', // ID วิดีโอเริ่มต้น
+      events: {
+        'onStateChange': onPlayerStateChange
+      }
+    });
+  }
+};
+
+function onPlayerStateChange(event) {
+    // ฟังก์ชันเสริมเผื่อต้องการจัดการสถานะวิดีโอ (ว่างไว้ก่อนได้)
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initQRSwitcher();
   initTaxModal();
@@ -7,8 +26,50 @@ document.addEventListener('DOMContentLoaded', () => {
   initCurrentDate();
   initGallery();
   initRegistration();
-  onYouTubeIframeAPIReady();
+  setupVideoButtons();
+  toggleBook(false); // ซ่อน PDF Viewer ตอนโหลดหน้า
 });
+
+// ==============================
+// PDF BOOK VIEWER
+// ==============================
+function toggleBook(isOpen) {
+  const cover = document.getElementById('bookCover');
+  const viewer = document.getElementById('pdfViewer');
+  const pdfFrame = document.getElementById('pdfFrame');
+  
+  // ระบุชื่อไฟล์ PDF ของคุณที่นี่ (ต้องวางไฟล์ไว้ในโฟลเดอร์เดียวกับเว็บ หรือระบุ Path ให้ถูก)
+  const pdfUrl = '/documents/mybook.pdf'; // เปลี่ยนเป็น URL ของไฟล์ PDF ที่ต้องการ
+
+  if (isOpen) {
+    cover.style.display = 'none';
+    viewer.style.display = 'block';
+    
+    // โหลดไฟล์เมื่อกดเปิดเท่านั้น (ประหยัดเน็ต)
+    if (!pdfFrame.getAttribute('src')) {
+      pdfFrame.src = pdfUrl;
+    }
+  } else {
+    cover.style.display = 'block';
+    viewer.style.display = 'none';
+  }
+}
+// ==============================
+// YOUTUBE VIDEO SWITCHER
+// ==============================
+function setupVideoButtons() {
+  const buttons = document.querySelectorAll('.video-buttons button');
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      const videoId = button.getAttribute('data-video');
+      if (player && typeof player.loadVideoById === 'function') {
+        player.loadVideoById(videoId);
+      } else {
+        console.warn('YouTube Player ยังไม่พร้อมใช้งาน');
+      }
+    });
+  });
+}
 // ==============================
 // QR SWITCHER
 // ==============================
@@ -240,25 +301,6 @@ function initGallery() {
   popup.addEventListener('click', e => e.target === popup && (popup.style.display = 'none'));
 }
 
-// ==============================
-// YoutubeAPI
-// ==============================
-let player;
-      function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player', {
-          height: '300',
-          width: '500',
-          videoId: 'dQw4w9WgXcQ', // วิดีโอเริ่มต้น
-        });
-      }
-
-      document.querySelectorAll('.video-buttons button').forEach(button => {
-        button.addEventListener('click', () => {
-          const videoId = button.getAttribute('data-video');
-          player.loadVideoById(videoId);
-        });
-      });
-// ==============================
 // REGISTRATION FORM
 function initRegistration() {
   // ตั้งค่าวันเกิดสูงสุดเป็นวันปัจจุบัน

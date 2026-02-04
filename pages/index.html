@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="th">
-<head id="head"></head>
+<head id="head">
+<title>หน้าหลักมัสยิดบ้านสมเด็จ</title>
+</head>
   <div id="nav"></div>
 <body>
 <div class="dashboard">
@@ -15,8 +17,8 @@
     </form>
   </aside>
   <main class="dashboard-content">
+    <h1 style="text-align: center; color: #000;"><u>โครงสร้างบุคลากร</u></h1>
     <section id="about" class="about-section" aria-label="เกี่ยวกับมัสยิดบ้านสมเด็จ">
-      <h1 style="text-align: center;"><u>โครงสร้างบุคลากร</u></h1>
       <div class="team-container">
   <div class="member-card leader-card">
     <img src="../img/user-icon.jpg" alt="รูปหัวหน้า" style="width:100%; height: 200px; object-fit: cover;">
@@ -98,17 +100,35 @@
         </article>
       </div>
     </section>
-  <section id="teachings" class="teachings">
-    <h1 style="text-align: center;"><u>คำสอนของ อัลเลาะห์</u></h1>
-    <div class="video-buttons">
-      <button data-video="EASQQvYIFjY">Video 1</button>
-      <button data-video="C77pCQxyyn8">Video 2</button>
-      <button data-video="FTu5nd9mMXE">Video 3</button>
-    </div>
-    <div class="video-container">
+    <h1 style="text-align: center; color: #000;"><u>คำสอนทางศาสนา</h1></u>
+    <section id="teachings" class="learning-container">
+    <article class="youtube-videos card-box">
+      <h3 style="text-align: center; color: #000;">🎥 วิดีโอคำสอน</h3>
+      <div class="video-container">
       <div id="player"></div>
-    </div>
-    <script src="https://www.youtube.com/iframe_api"></script>
+      </div>
+      <div class="video-buttons">
+        <button data-video="EASQQvYIFjY">Video 1</button>
+        <button data-video="C77pCQxyyn8">Video 2</button>
+        <button data-video="FTu5nd9mMXE">Video 3</button>
+      </div>
+      <script src="https://www.youtube.com/iframe_api" defer></script>
+    </article>
+    <article class="book-cover card-box">
+      <div id="bookCover" class="book-placeholder">
+        <div class="book-icon">📖</div>
+        <h3>เอกสารเกี่ยวกับมัสยิดและคำสอน</h3>
+        <p>คลิกเพื่อเปิดอ่านไฟล์ PDF</p>
+        <button class="btn-open-book" onclick="toggleBook(true)">เปิดหนังสือ</button>
+      </div>
+
+      <div id="pdfViewer" class="pdf-container" style="display: none;">
+        <div class="pdf-header">
+        <span>เอกสารประกอบ.pdf</span>
+        <button class="btn-close-book" onclick="toggleBook(false)">✖ ปิด</button>
+      </div>
+      <iframe id="pdfFrame" src="" width="100%" height="100%"></iframe>
+    </article>
   </section>
 </main>
 </div>
